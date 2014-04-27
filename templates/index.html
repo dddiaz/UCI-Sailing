@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+      <!-- Bootstrap core CSS -->
+      <link type="text/css" rel="stylesheet" href="css/bootstap.min.css" />
+
+      <!-- Custom styles for this template -->
+      <link type="text/css" rel="stylesheet" href="css/cover.css" />
+
+      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">UCI SAILING</h3>
+              <ul class="nav masthead-nav">
+                <!--This is the log out button if someone was logged in with google)-->
+                <a href="{{ url|safe }}">{{ url_linktext }}</a>
+              </ul>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h1 class="cover-heading">Interested in UCI Sailing?</h1>
+            <p class="lead">This is where the submit form would go. Right now its just a text field.</p>
+            <p class="lead">I was thinking a name field, email field (VALIDATED OF COURSE!), and a year choice)</p>
+
+            <form action="/sign?guestbook_name={{ guestbook_name }}" method="post">
+                <div><textarea name="content" rows="3" cols="60"></textarea></div>
+                <div><input type="submit" class="btn btn-lg btn-default" value="Sign Guestbook"></div>
+            </form>
+
+
+            <!---THis is too change the guestbook name but we dont want to do that --->
+            <!--
+            <form>Guestbook name:
+                <input value="{{ guestbook_name }}" name="guestbook_name">
+                <input type="submit" class="btn btn-lg btn-default" value="switch">
+            </form>
+            -->
+            <hr>
+
+            <!--This is the log out button if someone was logged in with google)-->
+            <a href="{{ url|safe }}">{{ url_linktext }}</a>
+
+            <h2 class="cover-heading">See who has already signed up...</h1>
+            <p>
+                {% for greeting in greetings %}
+                    {% if greeting.author %}
+                        <b>{{ greeting.author.nickname() }}</b> wrote:
+                    {% else %}
+                    An anonymous person wrote:
+                    {% endif %}
+                    <blockquote>{{ greeting.content }}</blockquote>
+                {% endfor %}
+            </p>
+
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Site made by DANIEL DIAZ for UCI SAILING</p>
+              <p><a href="http://www.danieldelvindiaz.com">www.danieldelvindiaz.com</a></p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/docs.min.js"></script>
+  </body>
+</html>
+{% endautoescape %}
